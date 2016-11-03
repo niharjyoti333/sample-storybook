@@ -28,11 +28,6 @@ module.exports = {
         test: /\.css?$/,
         loaders: [ 'style', 'css-loader?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]' ],
         include: __dirname
-      },
-      {
-        test: /\.scss$/,
-        loaders: 'style!css-loader?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!sass-loader?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]',
-        include: __dirname
       }
     ]
   }
