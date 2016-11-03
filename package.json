@@ -1,7 +1,7 @@
 {
-  "name": "jcpenney-components",
+  "name": "sample-components",
   "version": "0.0.0",
-  "description": "JCPenney Components description",
+  "description": "sample Components description",
   "scripts": {
     "start": "node server.js",
     "test": "cross-env NODE_ENV=test mocha --recursive --compilers js:babel-register --require ./test/setup.js",
