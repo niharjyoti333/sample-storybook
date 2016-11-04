@@ -2,7 +2,7 @@
   "name": "jc-shared-components",
   "version": "0.0.1",
   "description": "Shared Components",
-  "author":"rajendra kumar vankadari"
+  "author":"rajendra kumar vankadari",
   "scripts": {
     "start": "node server.js",
     "test": "cross-env NODE_ENV=test mocha --recursive --compilers js:babel-register --require ./test/setup.js",
