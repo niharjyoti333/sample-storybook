@@ -1,0 +1,7 @@
+@import 'colors.css';
+
+.test{
+	border : 1px solid;
+	color : var(--colorBlue);
+	margin: 25px;
+}

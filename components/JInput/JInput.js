@@ -13,7 +13,7 @@ class JInput extends Component{
   }
   render() {
     return <div>
-    	<input className={styles.test} onChange={this.clickMe} type={this.props.type} value="asd" />
+    	<input className={styles.test} onChange={this.clickMe} type={this.props.type} value="Welcome to Input Box" />
     </div>
   }
 }

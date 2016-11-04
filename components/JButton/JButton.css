@@ -1,0 +1,9 @@
+@import 'colors.css';
+
+.test{
+	color: var(--colorRed);
+	border-radius: 5px;
+	padding: 10px;
+	display: flex;
+	margin: 25px;
+}

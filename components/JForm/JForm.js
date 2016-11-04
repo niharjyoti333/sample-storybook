@@ -8,8 +8,11 @@ class JForm extends Component{
 		onClick: React.PropTypes.func,
 	};
 	
+	fSubmit(eve){
+		eve.preventDefault();
+	}
 	render(){
-		return <form>
+		return <form onSubmit={this.fSubmit}>
 			{this.props.children}
 		</form>
 	}
