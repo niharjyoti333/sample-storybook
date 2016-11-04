@@ -4,4 +4,9 @@
 	border : 1px solid;
 	color : var(--colorBlue);
 	margin: 25px;
+
+	.td{
+		color: black;
+		border : 1px solid blue;
+	}
 }

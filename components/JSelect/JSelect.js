@@ -12,7 +12,7 @@ class JSelect extends Component{
 	render(){
 		return <select className={styles.test} onChange={this.optionChanged}>
 			 {this.props.options.map(function(i,v){
-			 	return <option value={i.val} key={i.val}>{i.display}</option>
+			 	return <option value={i.val} key={i.val} className={styles['first']}>{i.display}</option>
 			 })}
 		</select>
 	}
