@@ -26,9 +26,12 @@ module.exports = {
       },
       {
         test: /\.css?$/,
-        loaders: [ 'style', 'css-loader?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]' ],
+        loaders: [ 'style', 'css-loader?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]' ,'postcss-loader'],
         include: __dirname
       }
     ]
+  },
+  postcss:function(){
+      return [require('postcss-smart-import'),require('autoprefixer')];
   }
 }
