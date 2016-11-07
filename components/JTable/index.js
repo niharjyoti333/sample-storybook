@@ -1,2 +1,1 @@
-import JTable from "./JTable";
-export default JTable;
+export {default} from "./JTable";

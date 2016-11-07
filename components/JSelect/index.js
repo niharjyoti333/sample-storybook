@@ -1,2 +1,1 @@
-import JSelect from './JSelect';
-export default JSelect;
+export {default} from './JSelect';
