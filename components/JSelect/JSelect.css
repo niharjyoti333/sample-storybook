@@ -1,7 +1,8 @@
+@import 'colors.css';
 .test{
 	margin: 25px;
 
-	.first{
-		color:red;
+	& .first{
+		color: var(--colorRed);
 	}
 }

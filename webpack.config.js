@@ -35,6 +35,6 @@ module.exports = {
     ]
   },
   postcss:function(){
-      return [require('postcss-smart-import')({path:['./styles']}),require('autoprefixer'),require('precss')];
+      return [require('postcss-smart-import')({path:['./styles']}),require("postcss-cssnext")()];
   }
 }

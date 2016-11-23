@@ -2,6 +2,7 @@
 
 .test{
 	color: var(--colorRed);
+	@apply --borderRadius(5px);
 	border-radius: 5px;
 	padding: 10px;
 	display: flex;
