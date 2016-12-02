@@ -1,40 +1,78 @@
 var path = require('path')
-var webpack = require('webpack')
+var webpack = require('webpack');
+var environ = require('./env.config');
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
 
+var JPlugins = {
+  HMRE    : new webpack.HotModuleReplacementPlugin(),
+  NOERR   : new webpack.NoErrorsPlugin(),
+  EXTTEXT : new ExtractTextPlugin({filename:'styles.css',disable:false,allChunks:true})
+};
+
+
+/**
+  Battle about Environment here.
+**/
+if(process.argv[2]){
+  var env = process.argv[2].split('=')[1];
+  if(env in environ.ENV){
+    environ.ENV[env] = true;
+  }else {
+    console.error('=>>>>> ..... Specified ENV does not exist, falling back to default mode DEV!!!!!');
+  }
+}else{
+  environ.ENV.DEV = true;
+}
+
 module.exports = {
-  devtool: 'cheap-module-eval-source-map',
-  entry: [
-    'webpack-hot-middleware/client',
-    './index'
-  ],
-  output: {
-    path: path.join(__dirname, 'dist'),
-    filename: 'bundle.js',
-    chunkFileName:"shared.js",
-    publicPath: '/static/'
+  devtool:"cheap-module-source-map",
+  entry: {
+    webpack: 'webpack-hot-middleware/client',
+    vendor : ['react','redux'],
+    app:'./index'
   },
-  plugins: [
-    new webpack.optimize.OccurenceOrderPlugin(),
-    new webpack.HotModuleReplacementPlugin(),
-    new ExtractTextPlugin("shared.css")
-  ],
+  output: {
+    path:path.resolve(__dirname,'dist'),
+    filename: '[name].bundle.js',
+    publicPath: '/static/',
+    library: 'shared'
+  },
   module: {
-    loaders: [
+    rules: [
       {
         test: /\.js$/,
-        loaders: [ 'babel' ],
-        exclude: /node_modules/,
-        include: __dirname
+        include: [path.resolve(__dirname,'/')],
+        exclude: [path.resolve(__dirname,'/node_modules/')],
+        use: [ 'babel-loader' ]
       },
       {
         test: /\.css?$/,
-        loaders: ['style-loader', 'css-loader?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]' ,'postcss-loader'],
+        exclude: [path.resolve(__dirname,'/node_modules/')],
+        loader: ExtractTextPlugin.extract({loader:['css-loader?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]']}),
         include: __dirname
       }
     ]
   },
-  postcss:function(){
-      return [require('postcss-smart-import')({path:['./styles']}),require('autoprefixer'),require('precss')];
-  }
+  plugins: environ.ENV['PROD'] ? [
+    new webpack.optimize.OccurrenceOrderPlugin(),
+    JPlugins.HMRE,
+    JPlugins.NOERR,
+    new webpack.optimize.UglifyJsPlugin({
+      compress: { warnings: true }
+    }),
+    JPlugins.EXTTEXT
+  ] : [
+    new webpack.optimize.OccurrenceOrderPlugin(),
+    JPlugins.HMRE,
+    JPlugins.NOERR,
+    JPlugins.EXTTEXT,
+    function() {
+      this.plugin("done", function(stats) {
+        require("fs").writeFileSync(
+          path.join(__dirname, "", "stats.json"),
+          JSON.stringify(stats.toJson()));
+          //console.log(JSON.stringify(stats.toJson()));
+      });
+    }
+  ]
 }
