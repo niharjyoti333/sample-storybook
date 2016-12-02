@@ -1,4 +1,7 @@
 :root{
 	--colorRed : red;
 	--colorBlue : blue;
+	--borderRadius($radius){
+		border-radius: $radius;
+	}
 }

@@ -1,7 +1,7 @@
 {
-  "name": "babel-test",
+  "name": "core webpack file",
   "version": "0.0.2",
-  "description": "test private temp ",
+  "description": "Webpack bundler to bundle and chunk Js,Css files",
   "main": "index.js",
   "scripts": {
     "start": "node server.js"
